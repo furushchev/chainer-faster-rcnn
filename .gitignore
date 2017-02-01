@@ -19,3 +19,4 @@ docker/caffe
 faster_rcnn_models
 lib/build
 lib/fast_rcnn.egg-info/
+results/
