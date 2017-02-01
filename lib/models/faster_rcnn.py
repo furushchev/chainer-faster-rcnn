@@ -14,7 +14,7 @@ from lib.faster_rcnn.smooth_l1_loss import smooth_l1_loss
 from lib.models.rpn import RPN
 from lib.models.vgg16 import VGG16
 from chainer.links import VGG16Layers
-from vgg16_pretrained import VGG16Feature
+from lib.models.vgg16_pretrained import VGG16Feature
 
 import chainer
 import chainer.functions as F
