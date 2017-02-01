@@ -79,6 +79,18 @@ if __name__ == '__main__':
          'main/loss_cls', 'main/loss_bbox', 'validation/main/rpn_loss_cls',
          'validation/main/rpn_loss_bbox', 'validation/main/loss_cls',
          'validation/main/loss_bbox']))
+
+    # Save plot images to the result dir
+    def extend_plot_report(key):
+        trainer.extend(
+            extensions.PlotReport(['main/' + key, 'validation/main/' + key],
+                                  'iteration',
+                                  file_name=key + '.png'))
+    extend_plot_report('rpn_loss_cls')
+    extend_plot_report('rpn_loss_bbox')
+    extend_plot_report('loss_cls')
+    extend_plot_report('loss_bbox')
+
     trainer.extend(extensions.ProgressBar())
 
     trainer.run()
