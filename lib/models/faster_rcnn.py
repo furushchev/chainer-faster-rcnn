@@ -13,6 +13,8 @@ from lib.faster_rcnn.roi_pooling_2d import roi_pooling_2d
 from lib.faster_rcnn.smooth_l1_loss import smooth_l1_loss
 from lib.models.rpn import RPN
 from lib.models.vgg16 import VGG16
+from chainer.links import VGG16Layers
+from vgg16_pretrained import VGG16Feature
 
 import chainer
 import chainer.functions as F
@@ -22,7 +24,7 @@ import chainer.links as L
 class FasterRCNN(chainer.Chain):
 
     def __init__(
-            self, gpu=-1, trunk=VGG16, rpn_in_ch=512, rpn_out_ch=512,
+            self, gpu=-1, trunk=VGG16Feature, rpn_in_ch=512, rpn_out_ch=512,
             n_anchors=9, feat_stride=16, anchor_scales='8,16,32',
             num_classes=21, spatial_scale=0.0625, rpn_sigma=1.0, sigma=3.0):
         super(FasterRCNN, self).__init__()
