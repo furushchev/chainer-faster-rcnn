@@ -3,6 +3,7 @@
 
 # Copyright (c) 2016 Shunta Saito
 
+import chainer
 from chainer import iterators
 from chainer import training
 from chainer.training import extensions
@@ -54,6 +55,7 @@ if __name__ == '__main__':
     valid_iter = iterators.SerialIterator(valid, args.valid_batchsize,
                                           repeat=False, shuffle=False)
 
+    chainer.cuda.set_max_workspace_size(2**30)
     # Updater
     updater = ParallelUpdater(train_iter, optimizer, devices=devices)
     trainer = training.Trainer(updater, (args.epoch, 'epoch'), out=result_dir)
