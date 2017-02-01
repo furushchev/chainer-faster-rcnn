@@ -106,7 +106,8 @@ class FasterRCNN(chainer.Chain):
                              'loss_bbox': loss_bbox,
                              'loss_cls': loss_cls}, self)
 
-            return rpn_cls_loss, rpn_loss_bbox, loss_bbox, loss_cls
+            loss = rpn_cls_loss + rpn_loss_bbox + loss_bbox + loss_cls
+            return loss
         else:
             pred_boxes = bbox_transform_inv(boxes, box_deltas, self.gpu)
             pred_boxes = clip_boxes(pred_boxes, im_info[0][:2], self.gpu)

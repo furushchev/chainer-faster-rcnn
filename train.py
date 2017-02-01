@@ -57,7 +57,10 @@ if __name__ == '__main__':
 
     chainer.cuda.set_max_workspace_size(2**30)
     # Updater
-    updater = ParallelUpdater(train_iter, optimizer, devices=devices)
+    #updater = ParallelUpdater(train_iter, optimizer, devices=devices)
+    updater = chainer.training.StandardUpdater(train_iter,
+                                               optimizer, device=devices['main'])
+
     trainer = training.Trainer(updater, (args.epoch, 'epoch'), out=result_dir)
 
     # Extentions
