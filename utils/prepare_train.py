@@ -173,23 +173,23 @@ def get_model(
         spatial_scale=spatial_scale, rpn_sigma=rpn_sigma, sigma=sigma)
 
     # Load pre-trained trunk params
-    if trunk_file is not None and trunk_name is not None \
-            and trunk_param is not None:
-        logging.info('Loading pre-trained trunk parameters...')
-        trunk = np.load(trunk_param)
-        for name, param in model.namedparams():
-            if 'trunk' not in name:
-                continue
-            for trunk_name in trunk.keys():
-                if trunk_name in name:
-                    target = model.trunk
-                    names = [n for n in trunk_name.split('/') if len(n) > 0]
-                    for n in names[:-1]:
-                        target = target.__dict__[n]
-                    logging.info('{}: {} <- {}'.format(
-                        trunk_name, target.__dict__[names[-1]].data.shape,
-                        trunk[trunk_name].shape))
-                    target.__dict__[names[-1]].data = trunk[trunk_name]
+    #if trunk_file is not None and trunk_name is not None \
+    #        and trunk_param is not None:
+    #    logging.info('Loading pre-trained trunk parameters...')
+    #    trunk = np.load(trunk_param)
+    #    for name, param in model.namedparams():
+    #        if 'trunk' not in name:
+    #            continue
+    #        for trunk_name in trunk.keys():
+    #            if trunk_name in name:
+    #                target = model.trunk
+    #                names = [n for n in trunk_name.split('/') if len(n) > 0]
+    #                for n in names[:-1]:
+    #                    target = target.__dict__[n]
+    #                logging.info('{}: {} <- {}'.format(
+    #                    trunk_name, target.__dict__[names[-1]].data.shape,
+    #                    trunk[trunk_name].shape))
+    #                target.__dict__[names[-1]].data = trunk[trunk_name]
 
     # Copy files
     if result_dir is not None:
